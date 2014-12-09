@@ -1,4 +1,5 @@
 <?php
+require "/var/www/git/head.html";
 //path to directory to scan. i have included a wildcard for a subdirectory
 $directory = "images/*/";
 
@@ -36,6 +37,18 @@ var images = new Array();
 EOF;
 
 $imgs = '';
+// create array
+//foreach($images as $image){ $imgs[] = "$image"; }
+
+//shuffle array
+//shuffle($imgs);
+
+//select first 20 images in randomized array
+//$imgs = array_slice($imgs, 0, 20);
+
+// //display images
+// foreach ($imgs as $img) {
+// echo "<img src='$img' /> ";
 $olddir="";
 $count=1;
 echo "var images={\n";
@@ -81,10 +94,17 @@ $(document).ready(function() {
 $(".fancybox").fancybox();
 
 $(".open_fancybox").click(function() {
+//alert($(this).index());
 $.fancybox.open(images[$(this).index()+1],{
 padding:0,
 preload:3,
+afterLoad: function () {
+this.title = ' <a href= "'+this.href+'">Download</a>' + this.title;
+},
 helpers:  {
+title: {
+type: 'inside'
+},
         thumbs : {
             width: 150,
             height: 150
@@ -111,7 +131,22 @@ echo '<div style="width:100%;max-width:100%; max-height:100%; float=none;clear:b
 ;z-index:100;">';
 echo $html;
 echo '</div><br>';
+require "/var/www/git/tail.html";
 exit;
+$file='images/11Jan2013/DSC_0255.JPG';
+echo "$file: <br />\n";
+$exif = exif_read_data($file, 'IFD0');
+echo $exif===false ? "No header data found.<br />\n" : "Image contains headers<br />\n";
+echo '<pre>';
+print_r($exif);
+
+$exif = exif_read_data('tests/test2.jpg', 0, true);
+echo "test2.jpg:<br />\n";
+foreach ($exif as $key => $section) {
+    foreach ($section as $name => $val) {
+        echo "$key.$name: $val<br />\n";
+    }
+}
 ?>
 
 
