@@ -99,7 +99,7 @@ $.fancybox.open(images[$(this).index()+1],{
 padding:0,
 preload:3,
 afterLoad: function () {
-this.title = ' <a href= "'+this.href+'">Download</a>' + this.title;
+this.title = ' <a href= "'+this.href+'" download="image.jpg">Download</a>' + this.title;
 },
 helpers:  {
 title: {
