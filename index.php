@@ -4,7 +4,8 @@ require "/var/www/git/head.html";
 $directory = "images/*/";
 
 //get all image files with a .jpg extension.
-$images = glob("" . $directory . "*.[jJ][Pp][Gg]");
+//$images = glob("" . $directory . "*.[jJ][Pp][Gg]");
+exec('find '.$directory.' -iname \*jpg', $images);
 echo <<<EOF
 <center><h3>Gallery script by Amit Agarwal</h3></center>
 
@@ -64,7 +65,7 @@ foreach ($images as $image){
         $html.='<a class="open_fancybox" href="'.$image.'">
             <div style="width:250 ; float: left; font-size:80%;text-align:center;">
             <img width=250 src="'.$image.'" alt="" style="padding-bottom:0.5em;" />
-            '.substr($olddir,7).'
+            '.preg_replace ('/\//', ' > ' ,substr($olddir,7)).'
             </div>
             </a>'."\n";
         //<figure>
