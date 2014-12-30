@@ -61,10 +61,12 @@ foreach ($images as $image){
         echo "$count: [\n";
         $count++;
         $olddir=$parts['dirname'];
-        //$html.='<a class="open_fancybox" href="'.$image.'"><img width=250 src="'.$image.'" alt=""/></a>'."\n";
-        $html.='<a class="open_fancybox" href="'.$image.'">
+//$html.='<a class="open_fancybox" href="'.$image.'"><img width=250 height=300 src="'.$image.'" alt=""/></a>'."\n";
+        $html.='
+            <a class="open_fancybox" href="'.$image.'">
             <div style="width:250 ; float: left; font-size:80%;text-align:center;">
-            <img width=250 src="'.$image.'" alt="" style="padding-bottom:0.5em;" />
+            <a href=zip.php?s='.$olddir.'&d=/tmp/test.zip&a='.$olddir.'.zip>Download as zip</a>
+            <img width=250 height=250 src="'.$image.'" alt="" style="padding-bottom:0.5em;" />
             '.preg_replace ('/\//', ' > ' ,substr($olddir,7)).'
             </div>
             </a>'."\n";
